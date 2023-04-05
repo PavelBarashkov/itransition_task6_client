@@ -39,7 +39,7 @@ export const Message = () => {
     });
 
    
-    const wsConnection = new WebSocket("ws://task-6-server-2pal.onrender.com:8999");
+    const wsConnection = new WebSocket("wss://task-6-server-2pal.onrender.com:8999");
 
   
 
