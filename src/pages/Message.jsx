@@ -12,12 +12,13 @@ import { FormLisUsers } from "../components/FormListUsers";
 import { MessageForm } from "../components/MessaageForm";
 import { useNavigate } from "react-router-dom";
 import { Autocompletes } from "../components/Autocomplete";
+import { observer } from "mobx-react-lite";
 
 
 
 
 
-export const Message = () => {
+export const Message = observer(() => {
     const [modal, setModal] = useState(false);
     const [modal2, setModal2] = useState(false);
     const [users, setUsers] = useState([]);
@@ -37,13 +38,32 @@ export const Message = () => {
         const arr = response.data.messages.filter(item => item.senderid === userId.id)
         setArrMessage(arr);
     });
-    const wsConnection = new WebSocket("ws://task-6-server-kfn7.onrender.com:8999");
+    const wsConnection = new WebSocket("wss://ask-6-server-k13g.onrender.com:8999");
 
 
+    // if(localStorage.getItem('token')) {
+
+    // }
     useEffect(() => {
-        wsConnection.onopen = () => {
-            console.log("Соединение установлено. Message");
-        }
+        
+            console.log(localStorage.getItem('token'))
+            wsConnection.onopen = () => {
+                const token = localStorage.getItem('token')
+                if(token) {
+                    const user = jwtDecode(token);
+                    const message = {
+                        event: 'connection',
+                        username: user.name,
+                        id: user.id
+                    }
+                    wsConnection.send(JSON.stringify(message))
+                    console.log("Соединение установлено.");
+                }else {
+                    console.log("нет токена");
+                }
+            }
+       
+       
         fetchUsers();
     }, []);
       
@@ -160,4 +180,4 @@ export const Message = () => {
             </div>
         </Container>
     )
-}
+})
