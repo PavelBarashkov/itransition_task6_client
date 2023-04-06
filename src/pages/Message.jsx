@@ -37,7 +37,7 @@ export const Message = () => {
         const arr = response.data.messages.filter(item => item.senderid === userId.id)
         setArrMessage(arr);
     });
-    const wsConnection = new WebSocket("wss://task-6-server-kfn7.onrender.com:8999");
+    const wsConnection = new WebSocket("ws://task-6-server-kfn7.onrender.com:8999");
 
 
     useEffect(() => {
