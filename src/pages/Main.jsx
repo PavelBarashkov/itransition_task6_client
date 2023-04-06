@@ -43,7 +43,7 @@ export const Main = () => {
    
       
     useEffect(() => {
-        const wsConnection = new WebSocket("ws://localhost:8999");
+        const wsConnection = new WebSocket("wss://task-6-server-cdae.onrender.com:8999");
 
         wsConnection.onopen = () => {
             const message = {
@@ -82,7 +82,7 @@ export const Main = () => {
             }
         };
 
-
+        wsSend('Ты меня слышишь сервер?')
 
         fetchRecipient();
         fetchSender();

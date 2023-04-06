@@ -39,7 +39,7 @@ export const Message = () => {
     });
 
    
-    const wsConnection = new WebSocket("wss://task-6-server-2pal.onrender.com:8999");
+    const wsConnection = new WebSocket("wss://task-6-server-cdae.onrender.com:8999");
 
   
 
@@ -89,7 +89,6 @@ export const Message = () => {
         setSelectedUser(user);
       }
 
-    console.log(selectedUser)
     return (
         <Container>
             <h1 style={{textAlign:'center', color:'white', marginBottom: 35}}> Отправить сообщение </h1>
@@ -141,13 +140,7 @@ export const Message = () => {
                         value={textMessage}
                         onChange={event => setTextMessage(event.target.value)}
                     />
-                    <Button 
-                        style={{marginTop: 15}}
-                        variant="warning"
-                        onClick={() =>  sendMessage()}
-                    >
-                        отправить
-                    </Button>
+                   <Button variant="primary" onClick={() => wsConnection.readyState === WebSocket.OPEN && sendMessage()}>Отправить</Button>
                     <MyModal visible={modal2} setVisible={setModal2}>
                         
                         <h4>Кому: {selectedUser?.name}</h4>
