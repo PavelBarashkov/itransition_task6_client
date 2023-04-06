@@ -39,7 +39,7 @@ export const Message = observer(() => {
     });
 
 
-    const wsConnection = new WebSocket("wss://test-server-h60h.onrender.com:8999");
+    const wsConnection = new WebSocket("wss://itransitiontask6server-production.up.railway.app");
 
 
 

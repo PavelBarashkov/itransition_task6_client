@@ -50,7 +50,7 @@ export const Main = observer(() => {
 
     useEffect(() => {
 
-        const wsConnection = new WebSocket("wss://test-server-h60h.onrender.com:8999");
+        const wsConnection = new WebSocket("wss://itransitiontask6server-production.up.railway.app");
 
         wsConnection.onopen = () => {
             const message = {
