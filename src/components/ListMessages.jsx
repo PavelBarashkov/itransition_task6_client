@@ -11,7 +11,7 @@ export const ListMessages = ({ data, onClick, showSender, showRecipient }) => {
   useEffect(() => {
     const getSenderName = async (senderId) => {
       try {
-        const response = await axios.get(`https://task-6-server-k13g.onrender.com/api/user/user/${senderId}`);
+        const response = await axios.get(`https://test-server-h60h.onrender.com/api/user/user/${senderId}`);
         setSenderName(prevState => ({
           ...prevState,
           [senderId]: response.data.name
@@ -33,7 +33,7 @@ export const ListMessages = ({ data, onClick, showSender, showRecipient }) => {
   useEffect(() => {
     const getRecipientName = async (recipientId) => {
       try {
-        const response = await axios.get(`https://task-6-server-k13g.onrender.com/api/user/user/${recipientId}`);
+        const response = await axios.get(`https://test-server-h60h.onrender.com/api/user/user/${recipientId}`);
         setRecipientName(prevState => ({
           ...prevState,
           [recipientId]: response.data.name
@@ -42,7 +42,7 @@ export const ListMessages = ({ data, onClick, showSender, showRecipient }) => {
         console.error(error);
       }
     };
-  
+
     data.forEach(message => {
       if (!recipientName[message.recipientid]) {
         getRecipientName(message.recipientid);
@@ -91,7 +91,7 @@ export const ListMessages = ({ data, onClick, showSender, showRecipient }) => {
       </div>
     );
   };
-  
+
 
   return (
     <div>

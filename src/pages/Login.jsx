@@ -15,7 +15,7 @@ export const Login = () => {
         try {
             let data;
             data = await login(name);
-            await user.setUser(data.user);
+            await user.setUser(user);
             await user.setIsAuth(true);
             navigate('/message');
         } catch(e){

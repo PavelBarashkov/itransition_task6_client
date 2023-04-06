@@ -17,7 +17,7 @@ export const NavBar = () => {
         localStorage.removeItem('token');
         navigate('/login')
     }
-  
+
       const main = () => {
         navigate('/main')
       }
@@ -50,7 +50,7 @@ export const NavBar = () => {
                           )}
                       </Nav>
                   )}
-            
+
                   {!localStorage.getItem('token') && (
                       <Nav className="mo-auto align-items-center">
                           <Nav.Link> Войти </Nav.Link>

@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react"
 import { Button, Container, Form, InputGroup } from "react-bootstrap"
 import { Server } from "../API/Server";
@@ -38,35 +37,19 @@ export const Message = observer(() => {
         const arr = response.data.messages.filter(item => item.senderid === userId.id)
         setArrMessage(arr);
     });
-    const wsConnection = new WebSocket("wss://ask-6-server-k13g.onrender.com:8999");
 
 
-    // if(localStorage.getItem('token')) {
+    const wsConnection = new WebSocket("wss://test-server-h60h.onrender.com:8999");
 
-    // }
+
+
     useEffect(() => {
-        
-            console.log(localStorage.getItem('token'))
-            wsConnection.onopen = () => {
-                const token = localStorage.getItem('token')
-                if(token) {
-                    const user = jwtDecode(token);
-                    const message = {
-                        event: 'connection',
-                        username: user.name,
-                        id: user.id
-                    }
-                    wsConnection.send(JSON.stringify(message))
-                    console.log("Соединение установлено.");
-                }else {
-                    console.log("нет токена");
-                }
-            }
-       
-       
+        wsConnection.onopen = () => {
+            console.log("Соединение установлено. Message");
+        }
         fetchUsers();
     }, []);
-      
+
     useEffect(() => {
         setArrMessage([]);
         if (selectedUser && selectedUser.id) {
@@ -96,7 +79,7 @@ export const Message = observer(() => {
             theme: inputTheme,
             body: textMessage,
             createMessage: date.toLocaleString(),
-            
+
         }))
         setTextMessage('');
         setInputTheme('');
@@ -106,7 +89,6 @@ export const Message = observer(() => {
         setSelectedUser(user);
       }
 
-    console.log(selectedUser)
     return (
         <Container>
             <h1 style={{textAlign:'center', color:'white', marginBottom: 35}}> Отправить сообщение </h1>
@@ -132,7 +114,7 @@ export const Message = observer(() => {
                             clickName={clickName}
                         />
                     </MyModal>
-                
+
 
                     <InputFieldGroup 
                         inputValue={inputTheme}
@@ -149,11 +131,11 @@ export const Message = observer(() => {
                     />
                 </div>
 
-            
+
 
                 <div>
-                    
-               
+
+
                     <MessageForm 
                         value={textMessage}
                         onChange={event => setTextMessage(event.target.value)}
@@ -166,7 +148,7 @@ export const Message = observer(() => {
                         отправить
                     </Button>
                     <MyModal visible={modal2} setVisible={setModal2}>
-                        
+
                         <h4>Кому: {selectedUser?.name}</h4>
                         <div className="d-flex justify-content-between" style={{width: 500, marginBottom: 35}}>
                             <div><span style={{fontWeight: 'bold'}}>Тема: </span>{selectedMessage?.theme}</div>

@@ -7,12 +7,18 @@ import { useFetching } from "../hooks/useFetching";
 import { ListMessages } from "../components/ListMessages"
 import { MyModal } from "../components/UI/MyModal/MyModal";
 import { BasicExample } from "../components/BasicExample";
+import { observer } from "mobx-react-lite";
 
 
 
-export const Main = () => {
+export const Main = observer(() => {
     const navigate = useNavigate();
     const userId = jwtDecode(localStorage.getItem('token'));
+
+    // let userId;
+    // if(localStorage.getItem('token')) {
+    //     userId = jwtDecode(localStorage.getItem('token'));
+    // }
     const [recipientMessages, setRecipientMessages] = useState([]);
     const [senderMessages, setSenderMessages] = useState([]);
     const [modalRecipient, setModalRecipient] = useState(false);
@@ -20,10 +26,10 @@ export const Main = () => {
     const [selectedMessage, setSelectedMessage] = useState(null);
     const [showToast, setShowToast] = useState(false);
     const [lastShownMessage, setLastShownMessage] = useState(null);
-    
+
+
 
    
-
 
     const [fetchRecipient, isRecipientLoading, recipientError] = useFetching(async()=> {
         const response =  await Server.getMessageSrecipientId(userId.id);
@@ -40,10 +46,11 @@ export const Main = () => {
         setSenderMessages(response?.data?.messages)
     })
 
-   localStorage.getItem('token')
-      
+
+
     useEffect(() => {
-        const wsConnection = new WebSocket("wss://task-6-server-k13g.onrender.com:8999");
+
+        const wsConnection = new WebSocket("wss://test-server-h60h.onrender.com:8999");
 
         wsConnection.onopen = () => {
             const message = {
@@ -53,7 +60,7 @@ export const Main = () => {
             }
             wsConnection.send(JSON.stringify(message))
             console.log("Соединение установлено.");
-            
+
         }
 
         wsConnection.onmessage = (event) => {
@@ -82,7 +89,7 @@ export const Main = () => {
             }
         };
 
-        wsSend('Ты меня слышишь сервер?')
+
 
         fetchRecipient();
         fetchSender();
@@ -99,7 +106,7 @@ export const Main = () => {
             fetchSender();
         }, 15000)
       }
-    
+
 
 
     const lastMessage = recipientMessages[recipientMessages.length - 1];
@@ -123,10 +130,10 @@ function handleCloseToast() {
                     ?<div>Загрузка</div>
                     :  
                         <div>
-                                        
+
 
                             <ListMessages 
-                            
+
                                 data={recipientMessages}
                                 showSender={true} 
                                 onClick={(event) => {
@@ -142,7 +149,7 @@ function handleCloseToast() {
                                 <div><span style={{fontWeight: 'bold'}}>Сообщение:</span> {selectedMessage?.body}</div>
                             </MyModal>
                         </div> 
-                     
+
                 }
             </div>
             <div style={
@@ -176,8 +183,8 @@ function handleCloseToast() {
                     }
 
             </div>
-            
-                
+
+
             <div style={{ position: 'absolute', bottom: '0', right: '1%' }}>
                 {showToast &&
                     <BasicExample 
@@ -187,7 +194,7 @@ function handleCloseToast() {
                 }
 
             </div>
-            
+
         </Container>
     )
-}   
+})
