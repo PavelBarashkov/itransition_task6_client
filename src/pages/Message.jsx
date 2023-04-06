@@ -37,11 +37,8 @@ export const Message = () => {
         const arr = response.data.messages.filter(item => item.senderid === userId.id)
         setArrMessage(arr);
     });
+    const wsConnection = new WebSocket("ws://task-6-server-kfn7.onrender.com:8999");
 
-   
-    const wsConnection = new WebSocket("wss://task-6-server-cdae.onrender.com:8999");
-
-  
 
     useEffect(() => {
         wsConnection.onopen = () => {
@@ -89,6 +86,7 @@ export const Message = () => {
         setSelectedUser(user);
       }
 
+    console.log(selectedUser)
     return (
         <Container>
             <h1 style={{textAlign:'center', color:'white', marginBottom: 35}}> Отправить сообщение </h1>
@@ -140,7 +138,13 @@ export const Message = () => {
                         value={textMessage}
                         onChange={event => setTextMessage(event.target.value)}
                     />
-                   <Button variant="primary" onClick={() => wsConnection.readyState === WebSocket.OPEN && sendMessage()}>Отправить</Button>
+                    <Button 
+                        style={{marginTop: 15}}
+                        variant="warning"
+                        onClick={() =>  sendMessage()}
+                    >
+                        отправить
+                    </Button>
                     <MyModal visible={modal2} setVisible={setModal2}>
                         
                         <h4>Кому: {selectedUser?.name}</h4>

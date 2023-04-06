@@ -43,7 +43,7 @@ export const Main = () => {
    
       
     useEffect(() => {
-        const wsConnection = new WebSocket("wss://task-6-server-cdae.onrender.com:8999");
+        const wsConnection = new WebSocket("ws://task-6-server-kfn7.onrender.com:8999");
 
         wsConnection.onopen = () => {
             const message = {
