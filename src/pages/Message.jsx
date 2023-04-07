@@ -8,7 +8,6 @@ import { InputFieldGroup } from "../components/InputFieldGroup";
 import { ListMessages} from "../components/ListMessages"
 import jwtDecode from "jwt-decode";
 import { MessageForm } from "../components/MessaageForm";
-import { useNavigate } from "react-router-dom";
 import { Autocompletes } from "../components/Autocomplete";
 import { observer } from "mobx-react-lite";
 
@@ -32,8 +31,11 @@ export const Message = observer(() => {
         setArrMessage(arr);
     });
     const wsConnection = new WebSocket("wss://itransitiontask6server-production.up.railway.app");
+
     useEffect(() => {
-  
+        wsConnection.onopen = () => {
+            console.log("Соединение установлено. Message");
+        }
         fetchUsers();
     }, []);
 
@@ -101,6 +103,8 @@ export const Message = observer(() => {
                             clickName={clickName}
                         />
                     </MyModal>
+
+
                     <InputFieldGroup 
                         inputValue={inputTheme}
                         onChangeTheme={event => setInputTheme(event.target.value)}
@@ -116,6 +120,8 @@ export const Message = observer(() => {
                     />
                 </div>
                 <div>
+
+
                     <MessageForm 
                         value={textMessage}
                         onChange={event => setTextMessage(event.target.value)}
