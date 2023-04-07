@@ -5,8 +5,6 @@ import { privateRoutes, publcRoutes } from "../router/routes"
 import { Context } from "..";
 
 export const AppRouter = observer(() => {
-
-
     const {user} = useContext(Context);
 
     return (

@@ -1,6 +1,5 @@
-import React, {useEffect, useState, useContext} from "react";
-import { Button, Container } from "react-bootstrap"
-import { useNavigate } from "react-router-dom"
+import React, {useEffect, useState } from "react";
+import { Container } from "react-bootstrap"
 import { Server } from "../API/Server";
 import jwtDecode from "jwt-decode";
 import { useFetching } from "../hooks/useFetching";
@@ -12,13 +11,7 @@ import { observer } from "mobx-react-lite";
 
 
 export const Main = observer(() => {
-    const navigate = useNavigate();
     const userId = jwtDecode(localStorage.getItem('token'));
-
-    // let userId;
-    // if(localStorage.getItem('token')) {
-    //     userId = jwtDecode(localStorage.getItem('token'));
-    // }
     const [recipientMessages, setRecipientMessages] = useState([]);
     const [senderMessages, setSenderMessages] = useState([]);
     const [modalRecipient, setModalRecipient] = useState(false);
@@ -26,10 +19,6 @@ export const Main = observer(() => {
     const [selectedMessage, setSelectedMessage] = useState(null);
     const [showToast, setShowToast] = useState(false);
     const [lastShownMessage, setLastShownMessage] = useState(null);
-
-
-
-   
 
     const [fetchRecipient, isRecipientLoading, recipientError] = useFetching(async()=> {
         const response =  await Server.getMessageSrecipientId(userId.id);
@@ -46,10 +35,7 @@ export const Main = observer(() => {
         setSenderMessages(response?.data?.messages)
     })
 
-
-
     useEffect(() => {
-
         const wsConnection = new WebSocket("wss://itransitiontask6server-production.up.railway.app");
 
         wsConnection.onopen = () => {
@@ -60,16 +46,13 @@ export const Main = observer(() => {
             }
             wsConnection.send(JSON.stringify(message))
             console.log("Соединение установлено.");
-
         }
 
         wsConnection.onmessage = (event) => {
             const message = JSON.parse(event.data);
             setLastShownMessage(message);
-            console.log(message)
             setShowToast(true)
         }
-
 
         wsConnection.onclose = () => {
             console.log('сокет закрыт');
@@ -79,17 +62,6 @@ export const Main = observer(() => {
             console.log('сокет произошла ошибка');
 
         }
-         const wsSend = function(data) {
-            if(!wsConnection.readyState){
-                setTimeout(function (){
-                    wsSend(data);
-                },100);
-            } else {
-                wsConnection.send(data);
-            }
-        };
-
-
 
         fetchRecipient();
         fetchSender();
@@ -107,13 +79,10 @@ export const Main = observer(() => {
         }, 15000)
       }
 
-
-
     const lastMessage = recipientMessages[recipientMessages.length - 1];
 
 function handleCloseToast() {
     setShowToast(false);
-
   }
     return (
         <Container>
@@ -183,8 +152,6 @@ function handleCloseToast() {
                     }
 
             </div>
-
-
             <div style={{ position: 'absolute', bottom: '0', right: '1%' }}>
                 {showToast &&
                     <BasicExample 

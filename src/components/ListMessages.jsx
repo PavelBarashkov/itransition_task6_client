@@ -28,8 +28,6 @@ export const ListMessages = ({ data, onClick, showSender, showRecipient }) => {
     });
   }, [data, senderName]);
 
-
-
   useEffect(() => {
     const getRecipientName = async (recipientId) => {
       try {
@@ -91,7 +89,6 @@ export const ListMessages = ({ data, onClick, showSender, showRecipient }) => {
       </div>
     );
   };
-
 
   return (
     <div>

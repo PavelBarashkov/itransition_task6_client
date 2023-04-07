@@ -6,6 +6,7 @@ import { login } from "../API/userAPI";
 
 
 
+
 export const Login = () => {
     const {user} = useContext(Context);
     const [name, setName] = useState('');
@@ -22,7 +23,6 @@ export const Login = () => {
             alert(e.response.data.message)
         }
     }
-
 
     return (
         <Container className="d-flex justify-content-center align-items-center"
