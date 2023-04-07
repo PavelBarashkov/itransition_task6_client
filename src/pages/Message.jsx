@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { Button, Container } from "react-bootstrap"
+import { Button, Container, Form, InputGroup } from "react-bootstrap"
 import { Server } from "../API/Server";
 import { ListUsers } from "../components/ListUsers";
 import { MyModal } from "../components/UI/MyModal/MyModal"
@@ -7,9 +7,15 @@ import { useFetching } from "../hooks/useFetching";
 import { InputFieldGroup } from "../components/InputFieldGroup";
 import { ListMessages} from "../components/ListMessages"
 import jwtDecode from "jwt-decode";
+import { FormLisUsers } from "../components/FormListUsers";
 import { MessageForm } from "../components/MessaageForm";
+import { useNavigate } from "react-router-dom";
 import { Autocompletes } from "../components/Autocomplete";
 import { observer } from "mobx-react-lite";
+
+
+
+
 
 export const Message = observer(() => {
     const [modal, setModal] = useState(false);
@@ -21,6 +27,7 @@ export const Message = observer(() => {
     const [selectedMessage, setSelectedMessage] = useState(null);
     const [inputTheme, setInputTheme] = useState('');
     const [textMessage, setTextMessage] = useState('')
+    const navigate = useNavigate();
     const [fetchUsers, isUserLoading, userError] = useFetching( async()=> {
         const response =  await Server.getAll();
         setUsers(response.data);
@@ -30,9 +37,14 @@ export const Message = observer(() => {
         const arr = response.data.messages.filter(item => item.senderid === userId.id)
         setArrMessage(arr);
     });
+
+
     const wsConnection = new WebSocket("wss://itransitiontask6server-production.up.railway.app");
 
+
+
     useEffect(() => {
+        
         wsConnection.onopen = () => {
             console.log("Соединение установлено. Message");
         }
@@ -61,15 +73,16 @@ export const Message = observer(() => {
     function sendMessage() {
         Server.getMessage(userId.id, selectedUser.id, inputTheme, textMessage);
         const date = new Date();
-        wsConnection.send(JSON.stringify({
-            event: 'message',
-            id: userId.id,
-            recipient: selectedUser.id,
-            theme: inputTheme,
-            body: textMessage,
-            createMessage: date.toLocaleString(),
-
-        }))
+            wsConnection.send(JSON.stringify({
+                event: 'message',
+                id: userId.id,
+                recipient: selectedUser.id,
+                theme: inputTheme,
+                body: textMessage,
+                createMessage: date.toLocaleString(),
+    
+            }))
+       
         setTextMessage('');
         setInputTheme('');
 
@@ -119,6 +132,9 @@ export const Message = observer(() => {
                             }}
                     />
                 </div>
+
+
+
                 <div>
 
 

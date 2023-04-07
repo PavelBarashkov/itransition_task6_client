@@ -36,7 +36,7 @@ export const Main = observer(() => {
     })
 
     useEffect(() => {
-        const wsConnection = new WebSocket("wss://itransitiontask6server-production.up.railway.app");
+        const wsConnection = new WebSocket("wss://itransitiontask6server-production.up.railway.app/");
 
         wsConnection.onopen = () => {
             const message = {
@@ -127,7 +127,7 @@ function handleCloseToast() {
                         padding: 15, 
                         borderRadius: 8
                         }}>
-                <h4>Отправелнные  сообщения</h4>
+                <h4>Отправленные  сообщения</h4>
 
                 {isSenderLoading
                         ?<div>Загрузка</div>
