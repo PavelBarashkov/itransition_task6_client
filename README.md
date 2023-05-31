@@ -1,70 +1,30 @@
-# Getting Started with Create React App
+# Web-приложение для обмена сообщениями
+Этот репозиторий содержит исходный код для веб-приложения, разработанного на стеке <br>node + express + ws + react + bootstrap-react.<br> Приложение предоставляет возможность пользователям отправлять сообщения друг другу. Каждое сообщение может содержать информацию о получателе, теме и тексте.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Основные функции
+1. **Создание и отправка сообщений:** Пользователи могут создавать новые сообщения, указывая получателя, тему и текст.<br>
+2. **Всплывающие уведомления:** Сообщения "всплывают" у получателя, чтобы привлечь его внимание.<br>
+3. **Просмотр полученных сообщений:** Пользователи могут просматривать все полученные сообщения, отображая информацию о отправителе, времени получения и теме. При клике на тему сообщения, отображается текст сообщения.<br>
+4. **Постоянное сохранение сообщений:** Все сообщения сохраняются в базу данных навсегда.
 
-## Available Scripts
+## Технологии и инструменты
+* **Node.js:** Веб-серверная платформа для запуска приложения.<br>
+* **Express.js:** Фреймворк для создания веб-приложений на Node.js.<br>
+* **WebSocket (ws):** Библиотека для реализации двусторонней связи между клиентом и сервером через сокеты.<br>
+* **React:** Библиотека для разработки пользовательского интерфейса.<br>
+* **Bootstrap-React:** Готовый CSS-фреймворк и набор компонентов для стилизации интерфейса.<br>
+* **База данных(PostgreSQL):** Используется база данных для постоянного хранения всех сообщений.<br>
 
-In the project directory, you can run:
+## Как использовать приложение
+1. Откройте приложение в веб-браузере.
+2. Введите ваше имя в поле ввода и нажмите "Войти".
+3. Создайте новое сообщение, указав получателя, тему и текст.
+4. Ваши сообщения будут доставлены получателям и "всплывут" у них.
+5. Чтобы просмотреть полученные сообщения, перейдите на страницу "Входящие сообщения".
+6. При клике на тему сообщения, текст сообщения будет отображен.
 
-### `npm start`
+## Замечания
+В приложении нет аутентификации, регистрации или паролей. Оно представляет собой анонимный чат-через-письма.
+Вы можете отправить сообщение самому себе, если необходимо.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+ссылка на [backend](https://github.com/PavelBarashkov/itransition_task6_server) 
